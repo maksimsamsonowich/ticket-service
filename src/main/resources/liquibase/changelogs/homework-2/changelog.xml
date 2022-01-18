@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd"
+        logicalFilePath="homework-2">
+
+    <changeSet id="homework-8-create_role_table" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/01.create-roles-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-8-role_table_data_insert_user" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/02.roles-table-user-role-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-8-role_table_data_insert_admin" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/04.roles-table-admin-role-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-8-role_table_data_insert_artist" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/05.roles-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-8-create-credits-table" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/06.create-credits-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-users" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/07.create-users-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-artists" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/08.create-artists-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-genres" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/09.create-genres-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-locations" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/10.create-locations-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-events" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/11.create-events_program-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-events_program" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/12.create-events-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-tickets" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/13.create-tickets-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-artists_genres" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/14.create-artists_genres-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-user-index" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/15.create-user-login-index.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-artists_ganres_index" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/16.create-artists_ganres-index.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-events_artists_id" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/17.create-events_artists_id-index.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-events_locations_id" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/18.create-events_locations_id-index.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-events_events_program_id" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/19.create-events_events_program-index.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-tickets_measure_id" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/20.create-tickets_events_id-index.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-tickets_user_id" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/21.create-tickets_user_id-index.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-2-artists_user_id" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/22.create-artists_users_id-index.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-5-insert_data_into_locations" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/23.location-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-6-insert_data_into_event_program" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/24.events_program-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-5-insert_data_into_creds" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/25.user-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-5-insert_data_into_users" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/26.users-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-6-insert_data_into_artists" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/27.artists-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-6-insert_data_into_events" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/28.events-table-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-6-insert_data_into_tickets" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/29.tickets-data-insert.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="homework-8-insert_data_users_roles_table" author="Maksim Samsonowich">
+        <sqlFile encoding="utf8" path="./sql/30.users_roles-table-create.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog> 

@@ -1,0 +1,2 @@
+create index artists_ganres_artists_id_genres_id_idx
+on artists_genres(artists_id, genres_id)
