@@ -1,7 +1,7 @@
 package com.senla.ticketservice.controller;
 
-import com.github.metamodel.Roles;
 import com.senla.ticketservice.dto.TicketDto;
+import com.senla.ticketservice.metamodel.Roles;
 import com.senla.ticketservice.service.IItemsSecurityExpressions;
 import com.senla.ticketservice.service.ITicketService;
 import lombok.AllArgsConstructor;

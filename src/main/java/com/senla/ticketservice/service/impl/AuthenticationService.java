@@ -32,7 +32,8 @@ public class AuthenticationService implements IAuthenticationService {
     public AuthenticationAnswerDto login(AuthenticationRequestDto requestDto) {
         try {
             String email = requestDto.getEmail();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, requestDto.getPassword()));
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(email, requestDto.getPassword()));
 
             Credential currentCredential = credentialRepository.getCredentialByEmail(email);
 

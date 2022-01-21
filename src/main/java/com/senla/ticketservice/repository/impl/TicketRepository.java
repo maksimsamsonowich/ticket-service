@@ -1,6 +1,7 @@
 package com.senla.ticketservice.repository.impl;
 
 import com.senla.ticketservice.entity.Event;
+import com.senla.ticketservice.entity.Event_;
 import com.senla.ticketservice.entity.Ticket;
 import org.springframework.stereotype.Repository;
 

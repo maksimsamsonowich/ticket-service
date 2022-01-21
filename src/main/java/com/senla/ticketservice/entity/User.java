@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -30,7 +31,7 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "firstName")
+    @Column(name = "firstname")
     private String firstName;
 
     @Column(name = "surname")
@@ -53,7 +54,7 @@ public class User {
     @Override
     public boolean equals(Object object) {
         User user = (User) object;
-        return id == user.getId();
+        return Objects.equals(id, user.getId());
     }
 
 }

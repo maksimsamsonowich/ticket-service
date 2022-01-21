@@ -1,7 +1,6 @@
 package com.senla.ticketservice.repository.impl;
 
-import com.senla.ticketservice.entity.Event;
-import com.senla.ticketservice.entity.Location;
+import com.senla.ticketservice.entity.*;
 import com.senla.ticketservice.filter.EventFilterDto;
 import com.senla.ticketservice.filter.PaginationDto;
 import com.senla.ticketservice.filter.fields.enums.SortDirection;
@@ -42,7 +41,6 @@ public class EventRepository extends AbstractRepository<Event> {
         return typedQuery.getSingleResult().getEvents();
     }
 
-    @Override
     public List<Event> getAll(PaginationDto pagination) {
         CriteriaQuery<Event> cq = criteriaBuilder.createQuery(entityClass);
         Root<Event> rootEntry = cq.from(entityClass);
