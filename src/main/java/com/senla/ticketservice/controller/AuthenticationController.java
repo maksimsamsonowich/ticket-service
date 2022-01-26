@@ -5,6 +5,7 @@ import com.senla.ticketservice.dto.AuthenticationRequestDto;
 import com.senla.ticketservice.dto.CredentialDto;
 import com.senla.ticketservice.service.IAuthenticationService;
 import com.senla.ticketservice.service.ICredentialService;
+import eu.senla.customlibrary.trackstatus.TrackStatus;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class AuthenticationController {
 
     private final IAuthenticationService iAuthenticationService;
 
+    @TrackStatus
     @PostMapping("auth")
     @PreAuthorize("permitAll")
     public ResponseEntity<AuthenticationAnswerDto> customerAuthentication
@@ -34,6 +36,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationAnswer);
     }
 
+    @TrackStatus
     @PreAuthorize("permitAll")
     @PostMapping("register")
     public ResponseEntity<AuthenticationAnswerDto> customerRegistration

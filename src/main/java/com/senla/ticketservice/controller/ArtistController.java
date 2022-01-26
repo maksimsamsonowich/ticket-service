@@ -5,6 +5,7 @@ import com.senla.ticketservice.dto.StatusDto;
 import com.senla.ticketservice.metamodel.Roles;
 import com.senla.ticketservice.service.IArtistService;
 import com.senla.ticketservice.service.IItemsSecurityExpressions;
+import eu.senla.customlibrary.trackstatus.TrackStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class ArtistController {
 
     private final IItemsSecurityExpressions iItemsSecurityExpressions;
 
+    @TrackStatus
     @PostMapping("{id}")
     @Secured(Roles.ADMIN)
     public ResponseEntity<StatusDto> createArtistCard(@PathVariable("id") Long userId,
@@ -33,6 +35,7 @@ public class ArtistController {
                 .setMessage("Success"));
     }
 
+    @TrackStatus
     @GetMapping("{id}")
     @PreAuthorize("permitAll")
     public ResponseEntity<ArtistDto> readArtist(@PathVariable("id") Long artistId) {
@@ -42,6 +45,7 @@ public class ArtistController {
         return ResponseEntity.ok(currentArtist);
     }
 
+    @TrackStatus
     @PutMapping("{id}")
     @PreAuthorize("@itemsSecurityExpressions.isUserOwnedArtistCard(#artistId, authentication)")
     public ResponseEntity<ArtistDto> updateArtist(@PathVariable("id") Long artistId,
@@ -51,6 +55,7 @@ public class ArtistController {
         return ResponseEntity.ok(currentArtist);
     }
 
+    @TrackStatus
     @DeleteMapping("{id}")
     @PreAuthorize("@itemsSecurityExpressions.isUserOwnedArtistCard(#artistId, authentication)")
     public ResponseEntity<StatusDto> deleteArtist(@PathVariable("id") Long artistId) {
@@ -61,6 +66,7 @@ public class ArtistController {
                 .setMessage("Success"));
     }
 
+    @TrackStatus
     @PreAuthorize("permitAll")
     @GetMapping("by-event/{id}")
     public ResponseEntity<ArtistDto> getArtistByEventId(@PathVariable("id") Long eventId) {

@@ -6,6 +6,7 @@ import com.senla.ticketservice.entity.Credential;
 import com.senla.ticketservice.repository.CredentialRepository;
 import com.senla.ticketservice.security.jwt.token.JwtTokenProvider;
 import com.senla.ticketservice.service.IAuthenticationService;
+import eu.senla.customlibrary.trackstatus.TrackStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +29,7 @@ public class AuthenticationService implements IAuthenticationService {
 
     private final AuthenticationManager authenticationManager;
 
+    @TrackStatus
     @Override
     public AuthenticationAnswerDto login(AuthenticationRequestDto requestDto) {
         try {
