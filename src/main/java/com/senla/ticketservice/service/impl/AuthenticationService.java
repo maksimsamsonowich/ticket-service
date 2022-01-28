@@ -29,7 +29,6 @@ public class AuthenticationService implements IAuthenticationService {
 
     private final AuthenticationManager authenticationManager;
 
-    @TrackStatus
     @Override
     public AuthenticationAnswerDto login(AuthenticationRequestDto requestDto) {
         try {

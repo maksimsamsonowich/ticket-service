@@ -14,8 +14,10 @@ public class RoleRepository extends AbstractRepository<Role> {
     }
 
     public Role findByName(String name) {
-        return (Role) entityManager.createQuery("select r from Role r where r.role = '" + name + "'")
-                        .getSingleResult();
+        return (Role) entityManager.createNativeQuery("select * from roles where role_name = '" + name + "'", Role.class)
+                .getSingleResult();
+        //return (Role) entityManager.createQuery("select r from Role r where r.role = '" + name + "'")
+        //                .getSingleResult();
     }
 
 }
