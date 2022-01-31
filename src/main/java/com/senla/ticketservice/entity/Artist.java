@@ -1,5 +1,6 @@
 package com.senla.ticketservice.entity;
 
+import com.senla.ticketservice.dto.ArtistDto;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -33,6 +34,13 @@ import java.util.Set;
         }
 
 )
+@NamedNativeQuery(name = "Artist.findArtistByNickname",
+        query = "select * from artists a where a.nickname = :nickname",
+        resultSetMapping = "Mapping.ArtistDto")
+@SqlResultSetMapping(name = "Mapping.ArtistDto",
+        classes = @ConstructorResult(targetClass = ArtistDto.class,
+                columns = {@ColumnResult(name = "id"),
+                        @ColumnResult(name = "nickname")}))
 public class Artist {
 
     @Id

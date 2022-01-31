@@ -27,7 +27,8 @@ public class EventRepository extends AbstractRepository<Event> {
     }
 
     public Set<Event> getEventsByLocation(Long id) {
-        EntityGraph<?> entityGraph = entityManager.getEntityGraph("location-entity-graph");
+        EntityGraph<?> entityGraph = entityManager.createEntityGraph(Location.class);
+        entityGraph.addAttributeNodes("events");
 
         CriteriaQuery<Location> criteriaQuery = criteriaBuilder.createQuery(Location.class);
 
@@ -36,7 +37,7 @@ public class EventRepository extends AbstractRepository<Event> {
         criteriaQuery.where(criteriaBuilder.equal(root.get(Location_.ID), id));
 
         TypedQuery<Location> typedQuery = entityManager.createQuery(criteriaQuery);
-        typedQuery.setHint("javax.persistence.fetchgraph", entityGraph);
+        typedQuery.setHint("javax.persistence.loadgraph", entityGraph);
 
         return typedQuery.getSingleResult().getEvents();
     }
