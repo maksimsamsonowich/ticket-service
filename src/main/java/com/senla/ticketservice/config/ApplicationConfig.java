@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.sql.DataSource;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import static org.modelmapper.config.Configuration.AccessLevel.PRIVATE;
 
@@ -27,5 +31,10 @@ public class ApplicationConfig {
                 .setSkipNullEnabled(true)
                 .setFieldAccessLevel(PRIVATE);
         return mapper;
+    }
+
+    @Bean
+    public Connection connection(DataSource dataSource) throws SQLException {
+        return dataSource.getConnection();
     }
 }
