@@ -32,6 +32,13 @@ public class LocationController {
     }
 
     @TrackStatus
+    @PreAuthorize("permitAll()")
+    @GetMapping("rest-template/{locationId}")
+    public LocationDto readLocationUsingRestTemplate(@PathVariable Long locationId) {
+        return iLocationService.readLocationUsingRestTemplate(locationId);
+    }
+
+    @TrackStatus
     @Secured(Roles.ADMIN)
     @PutMapping("{locationId}")
     public ResponseEntity<LocationDto> updateLocation(@PathVariable Long locationId, @RequestBody LocationDto locationDto) {

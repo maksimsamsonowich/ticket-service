@@ -8,6 +8,8 @@ public interface ILocationService {
 
     LocationDto readLocation(Long id);
 
+    LocationDto readLocationUsingRestTemplate(Long locationId);
+
     LocationDto update(Long id, LocationDto locationDto);
 
     void deleteLocation(Long id);

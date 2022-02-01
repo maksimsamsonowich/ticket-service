@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String AUTH_ENDPOINT = "/auth";
     private static final String REGISTRATION_ENDPOINT = "/register";
     private static final String GET_EVENT_ENDPOINT = "/event-management/**";
+    private static final String GET_LOCATION_ENDPOINT = "/location-management/**";
 
     private final JwtTokenFilter jwtTokenFilter;
 
@@ -53,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, AUTH_ENDPOINT).permitAll()
                 .antMatchers(HttpMethod.POST, REGISTRATION_ENDPOINT).permitAll()
                 .antMatchers(HttpMethod.GET, GET_EVENT_ENDPOINT).permitAll()
+                .antMatchers(HttpMethod.GET, GET_LOCATION_ENDPOINT).permitAll()
                 .anyRequest().authenticated();
     }
 
