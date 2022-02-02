@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +28,9 @@ import java.net.URISyntaxException;
 @RestController
 @NoArgsConstructor
 public class AuthenticationController {
+
+    @Value("${auth.url}")
+    private String url;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -46,7 +50,7 @@ public class AuthenticationController {
 
         try {
             if (Boolean.TRUE.equals(restTemplate.getForObject(
-                    new URI("http://localhost:8080/user-management/isBlocked/" + requestDto.getEmail()),
+                    new URI(url + requestDto.getEmail()),
                     Boolean.class))) {
                 throw new UsernameNotFoundException("Something went wrong :(");
             }
