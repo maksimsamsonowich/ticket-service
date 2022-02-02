@@ -3,6 +3,7 @@ package com.senla.ticketservice.controller;
 import com.senla.ticketservice.dto.AuthenticationAnswerDto;
 import com.senla.ticketservice.dto.AuthenticationRequestDto;
 import com.senla.ticketservice.dto.CredentialDto;
+import com.senla.ticketservice.dto.LocationDto;
 import com.senla.ticketservice.service.IAuthenticationService;
 import com.senla.ticketservice.service.ICredentialService;
 import eu.senla.annotation.Observe;
@@ -13,14 +14,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @Slf4j
 @RestController
 @NoArgsConstructor
 public class AuthenticationController {
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Autowired
     private ICredentialService iCredentialService;
@@ -34,6 +43,16 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationAnswerDto> customerAuthentication
             (@RequestBody AuthenticationRequestDto requestDto) {
         log.info("Authentication controller received the post request (customerAuthentication).");
+
+        try {
+            if (Boolean.TRUE.equals(restTemplate.getForObject(
+                    new URI("http://localhost:8080/user-management/isBlocked/" + requestDto.getEmail()),
+                    Boolean.class))) {
+                throw new UsernameNotFoundException("Something went wrong :(");
+            }
+        } catch (URISyntaxException e) {
+            throw new UsernameNotFoundException("Something went wrong");
+        }
 
         AuthenticationAnswerDto authenticationAnswer =
                 iAuthenticationService.login(requestDto);
