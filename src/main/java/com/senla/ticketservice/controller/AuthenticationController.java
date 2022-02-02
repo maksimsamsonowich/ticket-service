@@ -5,9 +5,12 @@ import com.senla.ticketservice.dto.AuthenticationRequestDto;
 import com.senla.ticketservice.dto.CredentialDto;
 import com.senla.ticketservice.service.IAuthenticationService;
 import com.senla.ticketservice.service.ICredentialService;
+import eu.senla.annotation.Observe;
 import eu.senla.customlibrary.trackstatus.TrackStatus;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,14 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@AllArgsConstructor
+@NoArgsConstructor
 public class AuthenticationController {
 
-    private final ICredentialService iCredentialService;
+    @Autowired
+    private ICredentialService iCredentialService;
 
-    private final IAuthenticationService iAuthenticationService;
+    @Autowired
+    private IAuthenticationService iAuthenticationService;
 
-    @TrackStatus
+    @Observe
     @PostMapping("auth")
     @PreAuthorize("permitAll")
     public ResponseEntity<AuthenticationAnswerDto> customerAuthentication
