@@ -1,6 +1,5 @@
 package com.senla.ticketservice.entity;
 
-import com.senla.ticketservice.entity.Artist;
 import lombok.experimental.Accessors;
 
 import javax.persistence.JoinColumn;

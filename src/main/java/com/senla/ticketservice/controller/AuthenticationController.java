@@ -3,12 +3,8 @@ package com.senla.ticketservice.controller;
 import com.senla.ticketservice.dto.AuthenticationAnswerDto;
 import com.senla.ticketservice.dto.AuthenticationRequestDto;
 import com.senla.ticketservice.dto.CredentialDto;
-import com.senla.ticketservice.dto.LocationDto;
 import com.senla.ticketservice.service.IAuthenticationService;
 import com.senla.ticketservice.service.ICredentialService;
-import eu.senla.annotation.Observe;
-import eu.senla.customlibrary.trackstatus.TrackStatus;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +37,6 @@ public class AuthenticationController {
     @Autowired
     private IAuthenticationService iAuthenticationService;
 
-    @Observe
     @PostMapping("auth")
     @PreAuthorize("permitAll")
     public ResponseEntity<AuthenticationAnswerDto> customerAuthentication
@@ -64,7 +59,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationAnswer);
     }
 
-    @TrackStatus
     @PreAuthorize("permitAll")
     @PostMapping("register")
     public ResponseEntity<AuthenticationAnswerDto> customerRegistration

@@ -5,7 +5,6 @@ import com.senla.ticketservice.filter.EventFilterDto;
 import com.senla.ticketservice.metamodel.Roles;
 import com.senla.ticketservice.service.IEventService;
 import com.senla.ticketservice.service.IItemsSecurityExpressions;
-import eu.senla.customlibrary.trackstatus.TrackStatus;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,6 @@ public class EventController{
 
     private final IItemsSecurityExpressions iItemsSecurityExpressions;
 
-    @TrackStatus
     @PostMapping
     @Secured(Roles.ARTIST)
     public ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventDto) {
@@ -35,7 +33,6 @@ public class EventController{
         return ResponseEntity.ok(iEventService.createEvent(eventDto));
     }
 
-    @TrackStatus
     @PreAuthorize("permitAll")
     @GetMapping("{eventId}")
     public ResponseEntity<EventDto> readEvent(@PathVariable Long eventId) {
@@ -44,7 +41,6 @@ public class EventController{
         return ResponseEntity.ok(iEventService.readEvent(eventId));
     }
 
-    @TrackStatus
     @Secured(Roles.ARTIST)
     @PutMapping("{eventId}")
     @PreAuthorize("@itemsSecurityExpressions.isUserOwnedEvent(#eventId, authentication)")
@@ -54,7 +50,6 @@ public class EventController{
         return ResponseEntity.ok(iEventService.update(eventId, eventDto));
     }
 
-    @TrackStatus
     @Secured(Roles.ARTIST)
     @DeleteMapping("{eventId}")
     @PreAuthorize("@itemsSecurityExpressions.isUserOwnedEvent(#eventId, authentication)")
@@ -64,7 +59,6 @@ public class EventController{
         iEventService.deleteEvent(eventId);
     }
 
-    @TrackStatus
     @PreAuthorize("permitAll")
     @GetMapping("by-location/{locationId}")
     public ResponseEntity<Set<EventDto>> getEventsByLocation(@PathVariable Long locationId) {
@@ -73,7 +67,6 @@ public class EventController{
         return ResponseEntity.ok(iEventService.getEventsByLocation(locationId));
     }
 
-    @TrackStatus
     @GetMapping("events")
     @PreAuthorize("permitAll")
     public ResponseEntity<List<EventDto>> getAllEventsSorted(@RequestBody(required = false) EventFilterDto paginationDto) {

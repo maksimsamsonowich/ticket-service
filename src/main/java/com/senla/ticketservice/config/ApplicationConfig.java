@@ -1,8 +1,5 @@
 package com.senla.ticketservice.config;
 
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Contact;
-import io.swagger.v3.oas.models.info.Info;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.sql.DataSource;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -47,19 +43,5 @@ public class ApplicationConfig {
         return new RestTemplate();
     }
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(
-                        new Info()
-                                .title("Ticket service")
-                                .version("1.0.0")
-                                .contact(
-                                        new Contact()
-                                                .email("msa2002@inbox.ru")
-                                                .url("t.me/motzisudo")
-                                                .name("Samsonowich Maksim")
-                                )
-                );
-    }
+
 }
