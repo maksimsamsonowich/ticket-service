@@ -6,6 +6,8 @@ import com.senla.ticketservice.metamodel.Roles;
 import com.senla.ticketservice.service.IArtistService;
 import com.senla.ticketservice.service.IItemsSecurityExpressions;
 import eu.senla.customlibrary.trackstatus.TrackStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,15 +18,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("artist-management")
+@Tag(name = "Artist controller", description = "Controller witch control the artists")
 public class ArtistController {
 
     private final IArtistService iArtistService;
 
-    private final IItemsSecurityExpressions iItemsSecurityExpressions;
-
     @TrackStatus
-    @PostMapping("{id}")
     @Secured(Roles.ADMIN)
+    @PostMapping("{id}")
+    @Operation(summary = "Create Artist", description = "Method to create artist card")
     public ResponseEntity<StatusDto> createArtistCard(@PathVariable("id") Long userId,
                                                       @RequestBody ArtistDto artistDto) {
 
