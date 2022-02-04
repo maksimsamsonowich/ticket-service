@@ -1,6 +1,9 @@
 package com.senla.ticketservice.service;
 
 import com.senla.ticketservice.dto.ArtistDto;
+import com.senla.ticketservice.dto.ArtistsPagination;
+
+import java.util.List;
 
 public interface IArtistService {
 
@@ -13,4 +16,6 @@ public interface IArtistService {
     void deleteArtist(Long artistId);
 
     ArtistDto getArtistByEventId(Long eventId);
+
+    List<ArtistDto> findAllArtistsWithPagination(ArtistsPagination pagination);
 }

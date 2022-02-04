@@ -1,6 +1,7 @@
 package com.senla.ticketservice.controller;
 
 import com.senla.ticketservice.dto.ArtistDto;
+import com.senla.ticketservice.dto.ArtistsPagination;
 import com.senla.ticketservice.dto.StatusDto;
 import com.senla.ticketservice.metamodel.Roles;
 import com.senla.ticketservice.service.IArtistService;
@@ -10,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -64,6 +67,13 @@ public class ArtistController {
         ArtistDto currentArtist = iArtistService.getArtistByEventId(eventId);
 
         return ResponseEntity.ok(currentArtist);
+    }
+
+    @PreAuthorize("permitAll")
+    @GetMapping("artists")
+    public List<ArtistDto> findAllArtists(@RequestBody ArtistsPagination pagination) {
+
+        return iArtistService.findAllArtistsWithPagination(pagination);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.senla.ticketservice.service.impl;
 
 import com.senla.ticketservice.dto.ArtistDto;
+import com.senla.ticketservice.dto.ArtistsPagination;
 import com.senla.ticketservice.entity.Artist;
 import com.senla.ticketservice.entity.Role;
 import com.senla.ticketservice.entity.User;
@@ -12,9 +13,11 @@ import com.senla.ticketservice.repository.impl.RoleRepository;
 import com.senla.ticketservice.repository.impl.UserRepository;
 import com.senla.ticketservice.service.IArtistService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -87,6 +90,16 @@ public class ArtistService implements IArtistService {
             throw new ArtistNotFoundException("There is no such artist");
         else
             return artistMapper.toDto(currentArtist, ArtistDto.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ArtistDto> findAllArtistsWithPagination(ArtistsPagination pagination) {
+        List<Artist> artists = artistRepository.findAll(
+                PageRequest.of(pagination.getPageNumber(),
+                pagination.getPageSize()));
+
+        return artistMapper.listToDto(artists, ArtistDto.class);
     }
 
 }
