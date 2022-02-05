@@ -7,7 +7,6 @@ import com.senla.ticketservice.entity.User;
 import com.senla.ticketservice.exception.role.RoleNotFoundException;
 import com.senla.ticketservice.mapper.IMapper;
 import com.senla.ticketservice.repository.RoleRepositorySpec;
-import com.senla.ticketservice.repository.impl.RoleRepository;
 import com.senla.ticketservice.repository.impl.UserRepository;
 import com.senla.ticketservice.repository.impl.specification.RoleSpecification;
 import com.senla.ticketservice.service.IUserService;

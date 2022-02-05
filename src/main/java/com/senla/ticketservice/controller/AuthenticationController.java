@@ -43,16 +43,6 @@ public class AuthenticationController {
             (@RequestBody AuthenticationRequestDto requestDto) {
         log.info("Authentication controller received the post request (customerAuthentication).");
 
-        try {
-            if (Boolean.TRUE.equals(restTemplate.getForObject(
-                    new URI(url + requestDto.getEmail()),
-                    Boolean.class))) {
-                throw new UsernameNotFoundException("Something went wrong :(");
-            }
-        } catch (URISyntaxException e) {
-            throw new UsernameNotFoundException("Something went wrong");
-        }
-
         AuthenticationAnswerDto authenticationAnswer =
                 iAuthenticationService.login(requestDto);
 
