@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String GET_EVENT_ENDPOINT = "/event-management/**";
     private static final String GET_LOCATION_ENDPOINT = "/location-management/**";
     private static final String SWAGGER_ENDPOINT = "/**/swagger-ui/**";
+    private static final String CREDS_TEST_ENDPOINT = "/personal-settings/**";
 
     private final JwtTokenFilter jwtTokenFilter;
 
@@ -62,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/webjars/**").permitAll()
+                .antMatchers(HttpMethod.GET, CREDS_TEST_ENDPOINT).permitAll()
                 .anyRequest().authenticated();
     }
 
