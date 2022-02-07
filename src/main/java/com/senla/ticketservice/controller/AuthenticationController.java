@@ -25,12 +25,6 @@ import java.net.URISyntaxException;
 @NoArgsConstructor
 public class AuthenticationController {
 
-    @Value("${auth.url}")
-    private String url;
-
-    @Autowired
-    private RestTemplate restTemplate;
-
     @Autowired
     private ICredentialService iCredentialService;
 

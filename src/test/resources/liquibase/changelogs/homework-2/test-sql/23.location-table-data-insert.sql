@@ -1,0 +1,1 @@
+insert into locations ( title, address, capacity ) values ( 'Heart', 'г.Гродно, ул.Кабяка, д.112', 60 )

@@ -20,7 +20,10 @@ public class UserRepository extends AbstractRepository<User> {
 
     public User findByUsername(String username) {
         return jdbcTemplate
-                .queryForObject("select u from User u join fetch u.credential cr where cr.email = '" + username + "'",
+                .queryForObject("select * from users as u " +
+                                "inner join creds as cr " +
+                                "on u.creds_id = cr.id " +
+                                "where cr.email = '" + username + "'",
                         User.class);
     }
 
