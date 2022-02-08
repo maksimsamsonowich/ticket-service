@@ -108,40 +108,6 @@ public class EventControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "fightingdemons@gmail.com", roles = "ARTIST")
-    public void updateEventSuccess() throws Exception {
-
-        eventDto = eventController.createEvent(eventDto).getBody();
-        eventDto.setTitle("Edited title");
-
-        this.jsonBody = jsonMapper.toJson(eventDto);
-
-        this.mockMvc.perform(MockMvcRequestBuilders
-                        .put("/event-management/{eventId}", eventDto.getId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonBody))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title",
-                        CoreMatchers.is(eventDto.getTitle())));
-    }
-
-    @Test
-    @WithMockUser(username = "fightingdemons@gmail.com", roles = "ARTIST")
-    public void deleteEventSuccess() throws Exception {
-
-        eventDto = eventController.createEvent(eventDto).getBody();
-
-        this.mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/event-management/{eventId}", eventDto.getId()))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk());
-
-        Assert.isNull(eventController.readEvent(eventDto.getId()).getBody());
-
-    }
-
-    @Test
     @Transactional(readOnly = true)
     @WithMockUser(username = "fightingdemons@gmail.com", roles = "ADMIN")
     public void getEventsByLocationSuccess() throws Exception{
