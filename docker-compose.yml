@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+
+  backend:
+    image: ticket-service:0.0.1-snapshot
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: tickets
+      POSTGRES_USER: maksim
+      POSTGRES_PASSWORD: maksim
