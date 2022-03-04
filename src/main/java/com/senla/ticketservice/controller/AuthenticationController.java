@@ -5,8 +5,12 @@ import com.senla.ticketservice.dto.AuthenticationRequestDto;
 import com.senla.ticketservice.dto.CredentialDto;
 import com.senla.ticketservice.service.IAuthenticationService;
 import com.senla.ticketservice.service.ICredentialService;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +26,20 @@ import java.net.URISyntaxException;
 
 @Slf4j
 @RestController
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class AuthenticationController {
 
-    @Autowired
-    private ICredentialService iCredentialService;
+    @Value("${rabbitmq.exchange}")
+    private String rabbitExchange;
 
-    @Autowired
-    private IAuthenticationService iAuthenticationService;
+    @Value("${rabbitmq.routingKey}")
+    private String rabbitRoutingKey;
+
+    private final RabbitTemplate rabbitTemplate;
+
+    private final ICredentialService iCredentialService;
+
+    private final IAuthenticationService iAuthenticationService;
 
     @PostMapping("auth")
     @PreAuthorize("permitAll")
@@ -39,6 +49,9 @@ public class AuthenticationController {
 
         AuthenticationAnswerDto authenticationAnswer =
                 iAuthenticationService.login(requestDto);
+
+        rabbitTemplate.convertAndSend(rabbitExchange, rabbitRoutingKey,
+                requestDto.getEmail());
 
         return ResponseEntity.ok(authenticationAnswer);
     }
