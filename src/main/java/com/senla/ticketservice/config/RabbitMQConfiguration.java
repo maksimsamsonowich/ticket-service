@@ -28,16 +28,18 @@ public class RabbitMQConfiguration {
     }
 
     @Bean
-    public AmqpAdmin amqpAdmin(ConnectionFactory connectionFactory) { return new RabbitAdmin(connectionFactory); }
-
-    @Bean
-    public TopicExchange exchange() {
-        return new TopicExchange(exchange);
+    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
+        return new RabbitAdmin(connectionFactory);
     }
 
     @Bean
-    public Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(routingKey);
+    public FanoutExchange exchange() {
+        return new FanoutExchange(exchange, true, false);
+    }
+
+    @Bean
+    public Binding binding() {
+        return BindingBuilder.bind(queue()).to(exchange());
     }
 
     @Bean

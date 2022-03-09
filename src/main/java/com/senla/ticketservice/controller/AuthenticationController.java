@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -34,6 +36,8 @@ public class AuthenticationController {
 
     @Value("${rabbitmq.routingKey}")
     private String rabbitRoutingKey;
+
+    private final RabbitAdmin rabbitAdmin;
 
     private final RabbitTemplate rabbitTemplate;
 
@@ -73,6 +77,11 @@ public class AuthenticationController {
                 iAuthenticationService.login(authenticationData);
 
         return ResponseEntity.ok(authenticationAnswer);
+    }
+
+    @PostConstruct
+    public void init() {
+        rabbitAdmin.initialize();
     }
 
 }
