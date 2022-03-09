@@ -8,6 +8,7 @@ services:
       - "8080:8080"
     depends_on:
       - database
+      - rabbitmq
 
   database:
     image: postgres:latest
@@ -24,3 +25,12 @@ services:
       - "8081:8081"
     depends_on:
       - backend
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: rabbitmq
+    environment:
+        - RABBITMQ_DEFAULT_USER=guest
+        - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "19999:15672"
